@@ -44,6 +44,7 @@ public class AnimalFragment extends Fragment {
     private OnAnimalSeleccionadoListener _listener;
 
     boolean esModoPaisaje;
+    Configuration configuration;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +52,8 @@ public class AnimalFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
-        esModoPaisaje = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+        configuration = getResources().getConfiguration();
+        esModoPaisaje = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE;
     }
 
     @Override
@@ -73,7 +75,7 @@ public class AnimalFragment extends Fragment {
                 if (_listener != null)
                     _listener.onAnimalSeleccionado(a);
 
-                if (esModoPaisaje) {
+                if (esModoPaisaje || (configuration.screenWidthDp >= 400)) {
                     ResumenAnimalFragment resumenFragment = ResumenAnimalFragment.newInstance(a);
                     getFragmentManager().beginTransaction()
                             .replace(R.id.fragment_container2, resumenFragment)

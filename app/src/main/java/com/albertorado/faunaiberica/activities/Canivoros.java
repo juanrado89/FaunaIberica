@@ -22,10 +22,12 @@ public class Canivoros extends AppCompatActivity implements CarrgarAnimales, Ani
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_canivoros);
 
-        esModoPaisaje = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+        configuration = getResources().getConfiguration();
+        esModoPaisaje = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE;
         cargarAnimales();
     }
     boolean esModoPaisaje;
+    Configuration configuration;
 
     private void cargarAnimales() {
 
@@ -76,7 +78,7 @@ public class Canivoros extends AppCompatActivity implements CarrgarAnimales, Ani
 
     @Override
     public void onAnimalSeleccionado(Animal a) {
-        if (esModoPaisaje) {
+        if (esModoPaisaje || (configuration.screenWidthDp >= 400)) {
             ResumenAnimalFragment resumenFragment = ResumenAnimalFragment.newInstance(a);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container2, resumenFragment)

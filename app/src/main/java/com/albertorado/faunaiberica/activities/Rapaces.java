@@ -18,11 +18,13 @@ import java.util.List;
 public class Rapaces extends AppCompatActivity implements CarrgarAnimales, AnimalFragment.OnAnimalSeleccionadoListener {
 
     boolean esModoPaisaje;
+    Configuration configuration;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rapaces);
-        esModoPaisaje = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+        configuration = getResources().getConfiguration();
+        esModoPaisaje = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE;
         cargarAnimales();
     }
 
@@ -76,7 +78,7 @@ public class Rapaces extends AppCompatActivity implements CarrgarAnimales, Anima
 
     @Override
     public void onAnimalSeleccionado(Animal a) {
-        if (esModoPaisaje) {
+        if (esModoPaisaje || configuration.screenWidthDp >= 400) {
             ResumenAnimalFragment resumenFragment = ResumenAnimalFragment.newInstance(a);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container2, resumenFragment)
