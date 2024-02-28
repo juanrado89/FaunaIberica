@@ -1,11 +1,7 @@
-package com.albertorado.faunaiberica;
+package com.albertorado.faunaiberica.entities;
 
-import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import androidx.annotation.NonNull;
-
 import java.io.Serializable;
 
 public class Animal implements Serializable, Parcelable {

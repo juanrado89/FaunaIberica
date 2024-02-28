@@ -16,13 +16,13 @@
             android:name=".ResumenAnimalActivity"
             android:exported="false" />
         <activity
-            android:name=".Rapaces"
+            android:name=".activities.Rapaces"
             android:exported="false" />
         <activity
-            android:name=".Canivoros"
+            android:name=".activities.Canivoros"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

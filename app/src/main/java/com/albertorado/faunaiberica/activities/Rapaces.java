@@ -1,10 +1,15 @@
-package com.albertorado.faunaiberica;
+package com.albertorado.faunaiberica.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Parcelable;
+
+import com.albertorado.faunaiberica.R;
+import com.albertorado.faunaiberica.entities.Animal;
+import com.albertorado.faunaiberica.fragments.AnimalFragment;
+import com.albertorado.faunaiberica.fragments.ResumenAnimalFragment;
+import com.albertorado.faunaiberica.helperinterface.CarrgarAnimales;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,11 +17,12 @@ import java.util.List;
 
 public class Rapaces extends AppCompatActivity implements CarrgarAnimales, AnimalFragment.OnAnimalSeleccionadoListener {
 
+    boolean esModoPaisaje;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rapaces);
-
+        esModoPaisaje = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
         cargarAnimales();
     }
 
@@ -53,8 +59,6 @@ public class Rapaces extends AppCompatActivity implements CarrgarAnimales, Anima
         for (int i = 0; i < animales.length; i++) {
             resultado.add(new Animal(animales[i], idsRecursos[i], idsResumen[i]));
         }
-
-        // Llamar a onAnimalesCargados después de cargar los animales
         onAnimalesCargados(resultado);
     }
 
@@ -72,10 +76,17 @@ public class Rapaces extends AppCompatActivity implements CarrgarAnimales, Anima
 
     @Override
     public void onAnimalSeleccionado(Animal a) {
-        // Este método se llama desde AnimalFragment cuando se selecciona un animal
-        Intent intent = new Intent(this, ResumenAnimalActivity.class);
-        intent.putExtra("animal", (Parcelable) a);
-        startActivity(intent);
+        if (esModoPaisaje) {
+            ResumenAnimalFragment resumenFragment = ResumenAnimalFragment.newInstance(a);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container2, resumenFragment)
+                    .commit();
+        } else {
+            ResumenAnimalFragment resumenFragment = ResumenAnimalFragment.newInstance(a);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, resumenFragment).addToBackStack(null)
+                    .commit();
+        }
     }
 
 

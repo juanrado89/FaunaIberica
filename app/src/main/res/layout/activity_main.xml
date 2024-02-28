@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="30dp"
-    tools:context=".MainActivity">
+    tools:context=".activities.MainActivity">
 
     <TextView
         android:id="@+id/appName"
@@ -14,10 +14,10 @@
         android:layout_alignParentTop="true"
         android:background="@color/black"
         android:gravity="center_horizontal"
-        android:text="Fauna Ibérica"
+        android:text="@string/fauna_ib_rica"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="30dp" />
+        android:textSize="30sp" />
 
     <TextView
         android:id="@+id/titulo"
@@ -32,7 +32,7 @@
         android:layout_marginRight="55dp"
         android:layout_marginBottom="150dp"
         android:background="#4CAF50"
-        android:text="Selecciona lo que quieres consultar"
+        android:text="@string/selecciona_lo_que_quieres_consultar"
         android:textColor="#880E4F"
         android:textSize="34sp" />
 
@@ -51,7 +51,7 @@
             android:id="@+id/carnivoros"
             android:layout_gravity="center"
             android:drawableRight="@drawable/zorro"
-            android:text="Carnivoros" />
+            android:text="@string/carnivoros" />
 
         <RadioButton
             android:layout_width="wrap_content"
@@ -59,7 +59,7 @@
             android:id="@+id/carronieros"
             android:layout_gravity="center"
             android:drawableRight="@drawable/aguila"
-            android:text="Rapaces y carroñeros" />
+            android:text="@string/rapaces_y_carro_eras" />
 
     </RadioGroup>
 

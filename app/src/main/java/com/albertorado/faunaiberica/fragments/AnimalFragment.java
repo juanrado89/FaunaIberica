@@ -1,16 +1,17 @@
-package com.albertorado.faunaiberica;
+package com.albertorado.faunaiberica.fragments;
 
-import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
-
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import com.albertorado.faunaiberica.entities.Animal;
+import com.albertorado.faunaiberica.R;
+import com.albertorado.faunaiberica.adapters.MyArrayAdapter;
 
 import java.util.List;
 
@@ -42,6 +43,7 @@ public class AnimalFragment extends Fragment {
     protected MyArrayAdapter aa;
     private OnAnimalSeleccionadoListener _listener;
 
+    boolean esModoPaisaje;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +51,7 @@ public class AnimalFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+        esModoPaisaje = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
     }
 
     @Override
@@ -70,10 +73,17 @@ public class AnimalFragment extends Fragment {
                 if (_listener != null)
                     _listener.onAnimalSeleccionado(a);
 
-                // Llamar a ResumenAnimalActivity directamente desde aquí
-                Intent intent = new Intent(getActivity(), ResumenAnimalActivity.class);
-                intent.putExtra("animal", (Parcelable) a);
-                startActivity(intent);
+                if (esModoPaisaje) {
+                    ResumenAnimalFragment resumenFragment = ResumenAnimalFragment.newInstance(a);
+                    getFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container2, resumenFragment)
+                            .commit();
+                } else {
+                    ResumenAnimalFragment resumenFragment = ResumenAnimalFragment.newInstance(a);
+                    getFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, resumenFragment).addToBackStack(null)
+                            .commit();
+                }
             }
         });
         return result;

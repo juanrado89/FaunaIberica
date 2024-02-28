@@ -1,4 +1,4 @@
-package com.albertorado.faunaiberica;
+package com.albertorado.faunaiberica.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.albertorado.faunaiberica.entities.Animal;
+import com.albertorado.faunaiberica.R;
 
 public class MyArrayAdapter extends ArrayAdapter<Animal> {
     class ViewHolder {
@@ -42,17 +45,16 @@ public class MyArrayAdapter extends ArrayAdapter<Animal> {
             vh = (ViewHolder) v.getTag();
         }
 
-        // Asigna los datos a las vistas
         vh.nombre.setText(a.getNombre());
-        vh.foto.setImageResource(a.getFoto()); // Asegúrate de tener un método getImagenAnimal() en tu clase Animal
+        vh.foto.setImageResource(a.getFoto());
 
         return v;
     } // getView
     @Override
     public boolean hasStableIds() {
         return true;
-    } @
-            Override
+    }
+    @Override
     public long getItemId(int position) {
         Animal a = getItem(position);
         return a.getNombre().hashCode();

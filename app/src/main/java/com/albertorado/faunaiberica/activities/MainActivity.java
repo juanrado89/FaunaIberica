@@ -1,4 +1,4 @@
-package com.albertorado.faunaiberica;
+package com.albertorado.faunaiberica.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,9 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
-import com.google.android.material.button.MaterialButton;
+import com.albertorado.faunaiberica.R;
 
 public class MainActivity extends AppCompatActivity {
 

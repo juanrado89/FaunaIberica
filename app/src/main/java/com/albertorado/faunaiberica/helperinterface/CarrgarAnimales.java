@@ -1,4 +1,6 @@
-package com.albertorado.faunaiberica;
+package com.albertorado.faunaiberica.helperinterface;
+
+import com.albertorado.faunaiberica.entities.Animal;
 
 import java.util.List;
 
